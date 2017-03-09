@@ -1,10 +1,13 @@
 var timesClicked = 0;
 var hungryLevel = 100;
+var sushiHungerLevel = 5;
+var hungry = true;
 
 $(document).ready(function(){
   console.log("I'm here with you");
 
   $(".container").append("<button>"+"I'm A Button!"+"</button>");
+
   $(".container").on("click","button",function(){
       console.log('Youve Clicked Me!');
       timesClicked += 1;
@@ -14,10 +17,15 @@ $(document).ready(function(){
           appendSushi();
       }
     });
+
   $(".container").on("click",".sushi",function(){
-    $(this).remove();
-    hungryLevel -= 5;
-    console.log(hungryLevel);
+    if (hungryLevel > 0){
+      $(this).remove();
+      hungryLevel -= sushiHungerLevel;
+      console.log(hungryLevel);
+    } else if (hungryLevel === 0){
+      console.log("OMG YUM, I'm full");
+    }
   });
 
 
